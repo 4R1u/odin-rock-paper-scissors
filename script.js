@@ -16,17 +16,30 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = prompt("Enter rock, paper, or scissors");
-    switch (choice) {
-        case "rock":
-        case "paper":
-        case "scissors":
-            return choice;
-            break;
-        default:
-            return getHumanChoice();
-    }
+    return prompt("Enter rock, paper, or scissors");
 }
 
 let humanScore = 0;
 let computerScore = 0;
+
+function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    if (humanChoice != "rock" && humanChoice != "paper" && humanChoice != "scissors") {
+        console.log("Invalid option!");
+        return;
+    }
+    if ((humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper"))
+        {
+            console.log("You win!");
+            ++humanScore;
+        }
+    else if (humanChoice === computerChoice) {
+        console.log("Tie!");
+    }
+    else {
+        console.log("You lose!");
+        ++computerScore;
+    }
+}
