@@ -14,3 +14,16 @@ function getComputerChoice() {
             break;
     }
 }
+
+function getHumanChoice() {
+    let choice = prompt("Enter rock, paper, or scissors");
+    switch (choice) {
+        case "rock":
+        case "paper":
+        case "scissors":
+            return choice;
+            break;
+        default:
+            return getHumanChoice();
+    }
+}
