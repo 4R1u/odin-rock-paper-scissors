@@ -22,7 +22,22 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-const result = document.querySelector(".result");
+const resultDiv = document.querySelector(".result");
+const winnerDiv = document.querySelector(".winner");
+const roundEvent = new CustomEvent("round", {detail: {}});
+
+const scoreDiv = document.querySelector(".score");
+scoreDiv.addEventListener("round", () => {
+    scoreDiv.textContent = `${humanScore} : ${computerScore}`;
+    if (!winnerDiv.textContent) {
+        if (humanScore >= 5) {
+            winnerDiv.textContent = "You win!";
+        }
+        else if (computerScore >= 5) {
+            winnerDiv.textContent = "You lose!";
+        }
+    }
+})
 
 function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toLowerCase();
@@ -34,16 +49,17 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper"))
     {
-        result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+        resultDiv.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
         ++humanScore;
         }
     else if (humanChoice === computerChoice) {
-        result.textContent = `Tie! You both chose ${humanChoice}`;
+        resultDiv.textContent = `Tie! You both chose ${humanChoice}`;
     }
     else {
-        result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+        resultDiv.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
         ++computerScore;
     }
+    scoreDiv.dispatchEvent(roundEvent);
 }
 
 document.querySelector(".rock").addEventListener(
@@ -59,15 +75,3 @@ document.querySelector(".scissors").addEventListener(
     () => {playRound("scissors", getComputerChoice())}
 );
     
-
-function playGame() {
-
-    if (humanScore > computerScore)
-        console.log("You win " + humanScore + ":" + computerScore + "!");
-    else if (humanScore < computerScore)
-        console.log("You lose " + humanScore + ":" + computerScore + "!");
-    else
-    console.log("You tied with the computer " + humanScore + ":" + computerScore + "!");
-}
-
-playGame();
