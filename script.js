@@ -46,20 +46,20 @@ function playRound(humanChoice, computerChoice) {
 
 document.querySelector(".rock").addEventListener(
     "click",
-    () => {playRound("rock", getComputerChoice());}
+    () => {playRound("rock", getComputerChoice())}
 );
 document.querySelector(".paper").addEventListener(
     "click",
-    () => {playRound("paper", getComputerChoice());}
+    () => {playRound("paper", getComputerChoice())}
 );
 document.querySelector(".scissors").addEventListener(
     "click",
-    () => {playRound("scissors", getComputerChoice());}
+    () => {playRound("scissors", getComputerChoice())}
 );
     
 
-
 function playGame() {
+
     if (humanScore > computerScore)
         console.log("You win " + humanScore + ":" + computerScore + "!");
     else if (humanScore < computerScore)
